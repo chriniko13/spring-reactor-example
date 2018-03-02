@@ -1,0 +1,135 @@
+========================================================================================================================
+1)COMPARISON USING IO TAKS. (BETWEEN DISRUPTOR AND THREAD POOL)
+========================================================================================================================
+Using the following parameters:
+
+    1) public static final int NUMBER_OF_TICKETS_TO_PURCHASE = 1_000;
+
+    2) private WorkQueueDispatcher workQueueDispatcher() {
+               return new WorkQueueDispatcher(
+                       "work-queue-dispatcher",
+                       72,
+                       2048,
+                       throwable -> log.error("Error occurred!", throwable),
+                       ProducerType.MULTI,
+                       new AgileWaitingStrategy()
+               );
+           }
+
+    3) @Bean
+           public Boolean addIo() {
+               return true;
+           }
+
+
+The output was:
+
+Will start to run scenario with name ---> Scenario which produces 1000 tickets.
+!!!ALL WORK SUBMITTED SUCCESSFULLY!!!
+
+------METRICS FOR WORK WITH NAME = Scenario which produces 1000 tickets. ------
+    estimatedTime(ms) = 4261
+    estimatedTime(s) = 4
+    averageTime per unit(ms) = 5
+--------------------------------------
+
+Finished running scenario with name ---> Scenario which produces 1000 tickets.
+
+
+========================================================================================================================
+
+
+Using the following parameters:
+
+    1) public static final int NUMBER_OF_TICKETS_TO_PURCHASE = 1_000;
+
+    2) private ThreadPoolExecutorDispatcher threadPoolExecutorDispatcher() {
+               return new ThreadPoolExecutorDispatcher(70, 1800);
+       }
+
+    3) @Bean
+       public Boolean addIo() {
+           return true;
+       }
+
+The output was:
+
+Will start to run scenario with name ---> Scenario which produces 1000 tickets.
+!!!ALL WORK SUBMITTED SUCCESSFULLY!!!
+
+------METRICS FOR WORK WITH NAME = Scenario which produces 1000 tickets. ------
+    estimatedTime(ms) = 4546
+    estimatedTime(s) = 4
+    averageTime per unit(ms) = 5
+--------------------------------------
+
+Finished running scenario with name ---> Scenario which produces 1000 tickets.
+
+
+
+========================================================================================================================
+2) COMPARISON USING NO IO TAKS. (BETWEEN DISRUPTOR AND THREAD POOL)
+========================================================================================================================
+
+Using the following parameters:
+
+    1) public static final int NUMBER_OF_TICKETS_TO_PURCHASE = 1_000;
+
+    2) private ThreadPoolExecutorDispatcher threadPoolExecutorDispatcher() {
+               return new ThreadPoolExecutorDispatcher(70, 1800);
+       }
+
+    3) @Bean
+       public Boolean addIo() {
+           return false;
+       }
+
+The output was:
+
+Will start to run scenario with name ---> Scenario which produces 1000 tickets.
+!!!ALL WORK SUBMITTED SUCCESSFULLY!!!
+
+------METRICS FOR WORK WITH NAME = Scenario which produces 1000 tickets. ------
+    estimatedTime(ms) = 199
+    estimatedTime(s) = 0
+    averageTime per unit(ms) = 1
+--------------------------------------
+
+Finished running scenario with name ---> Scenario which produces 1000 tickets.
+========================================================================================================================
+
+
+Using the following parameters:
+
+    1) public static final int NUMBER_OF_TICKETS_TO_PURCHASE = 1_000;
+
+    2) private WorkQueueDispatcher workQueueDispatcher() {
+               return new WorkQueueDispatcher(
+                       "work-queue-dispatcher",
+                       72,
+                       2048,
+                       throwable -> log.error("Error occurred!", throwable),
+                       ProducerType.MULTI,
+                       new AgileWaitingStrategy()
+               );
+           }
+
+    3) @Bean
+       public Boolean addIo() {
+           return false;
+       }
+
+
+The output was:
+
+Will start to run scenario with name ---> Scenario which produces 1000 tickets.
+!!!ALL WORK SUBMITTED SUCCESSFULLY!!!
+
+------METRICS FOR WORK WITH NAME = Scenario which produces 1000 tickets. ------
+    estimatedTime(ms) = 73
+    estimatedTime(s) = 0
+    averageTime per unit(ms) = 1
+--------------------------------------
+
+Finished running scenario with name ---> Scenario which produces 1000 tickets.
+========================================================================================================================
