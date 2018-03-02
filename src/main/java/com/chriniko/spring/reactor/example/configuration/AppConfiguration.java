@@ -42,8 +42,8 @@ public class AppConfiguration {
         return EventBus.create(
                 environment(),
                 //workQueueDispatcher() // Note: play with this.
-                //threadPoolExecutorDispatcher() // Note: play with this.
-                Environment.newDispatcher(1000, 60, DispatcherType.THREAD_POOL_EXECUTOR) // Note: play with this.
+                threadPoolExecutorDispatcher() // Note: play with this.
+                //Environment.newDispatcher(1000, 60, DispatcherType.THREAD_POOL_EXECUTOR) // Note: play with this.
         );
     }
 
